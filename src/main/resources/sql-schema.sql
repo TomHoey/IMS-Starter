@@ -17,3 +17,11 @@ CREATE TABLE IF NOT EXISTS `ims`.`items` (
     `price` float,
     PRIMARY KEY (`pid`)
     );
+    
+Create TABLE IF NOT EXISTS `ims`.`order` (
+	`oid` int not null auto_increment,
+    `Product` varchar(40),
+    `Sub_Total` float not null,
+    `Tax` float,
+    Primary key (`oid`)
+    );
