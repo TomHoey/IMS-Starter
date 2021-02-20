@@ -4,24 +4,36 @@ CREATE SCHEMA IF NOT EXISTS `ims`;
 
 USE `ims` ;
 
-CREATE TABLE IF NOT EXISTS `ims`.`customers` (
+CREATE TABLE IF NOT EXISTS `ims`.`Customers` (
     `id` INT(11) NOT NULL AUTO_INCREMENT,
     `first_name` VARCHAR(40) DEFAULT NULL,
     `surname` VARCHAR(40) DEFAULT NULL,
     PRIMARY KEY (`id`)
 );
 
-CREATE TABLE IF NOT EXISTS `ims`.`items` (
+CREATE TABLE IF NOT EXISTS `ims`.`Items` (
 	`pid` INT NOT NULL AUTO_INCREMENT,
     `Product` VARCHAR(40) NOT NULL,
     `price` float,
     PRIMARY KEY (`pid`)
     );
     
-Create TABLE IF NOT EXISTS `ims`.`order` (
+Create TABLE IF NOT EXISTS `ims`.`Order` (
 	`oid` int not null auto_increment,
     `Product` varchar(40),
     `Sub_Total` float not null,
     `Tax` float,
     Primary key (`oid`)
     );
+    
+Create TABLE IF NOT EXISTS `ims`.`Transactions` (
+	`id` int NOT NULL PRIMARY KEY,
+    `pid` int NOT NULL,
+    `oid` int NOT NULL,
+    `Quantity` int,
+    `Price` float,
+    Foreign Key (`pid`) references`Items` (`pid`),
+    Foreign Key (`oid`) references `Order` (`oid`)
+    );
+    
+    
