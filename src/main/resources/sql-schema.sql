@@ -5,7 +5,7 @@ CREATE SCHEMA IF NOT EXISTS `ims`;
 USE `ims` ;
 
 CREATE TABLE IF NOT EXISTS `ims`.`Customers` (
-    `id` INT(11) NOT NULL AUTO_INCREMENT,
+    `id` INT NOT NULL AUTO_INCREMENT,
     `first_name` VARCHAR(40) DEFAULT NULL,
     `surname` VARCHAR(40) DEFAULT NULL,
     PRIMARY KEY (`id`)
@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS `ims`.`Items` (
     );
     
 Create TABLE IF NOT EXISTS `ims`.`Order` (
-	`oid` int not null auto_increment,
+	`oid` INT NOT NULL AUTO_INCREMENT,
     `Product` varchar(40),
     `Sub_Total` float not null,
     `Tax` float,
@@ -36,4 +36,5 @@ Create TABLE IF NOT EXISTS `ims`.`Transactions` (
     Foreign Key (`oid`) references `Order` (`oid`)
     );
     
-    
+ALTER TABLE `ims`.`Items` auto_increment = 100;
+ALTER TABLE `ims`.`Order` auto_increment = 1000;
