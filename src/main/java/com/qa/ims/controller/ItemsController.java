@@ -47,16 +47,26 @@ public class ItemsController implements CrudController<Items> {
 		
 		
 	}
+	
+	//Allows a user to update an Item.
 
 	@Override
 	public Items update() {
-		// TODO Auto-generated method stub
-		return null;
+		LOGGER.info("Please enter the PID of the Item you would like to update. Remember - it starts at 100 and increments by 1.");
+		Long pid = utils.getLong();
+		LOGGER.info("Please enter the new product name.");
+		String productName = utils.getString();
+		LOGGER.info("Please enter the new price of the item.");
+		Double price =  utils.getDouble();
+		Items Items = itemsDAO.update(new Items(pid, productName, price));
+		LOGGER.info("Item Updated");
+		return Items;
 	}
 
 	@Override
 	public int delete() {
-		// TODO Auto-generated method stub
-		return 0;
+		LOGGER.info("Please enter the PID of the Item you wish to remove.");
+		Long pid = utils.getLong();
+		return itemsDAO.delete(pid);
 	}
 }

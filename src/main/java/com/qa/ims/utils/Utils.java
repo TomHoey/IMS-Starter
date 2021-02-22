@@ -1,9 +1,10 @@
 package com.qa.ims.utils;
 
-import java.util.Scanner;
 
+import java.util.Scanner;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 
 public class Utils {
 	
@@ -41,6 +42,8 @@ public class Utils {
 	public Double getDouble() {
 		String input = null;
 		Double doubleInput = null;
+		
+		
 		do {
 			try {
 				input = getString();
@@ -51,5 +54,4 @@ public class Utils {
 		} while (doubleInput == null);
 		return doubleInput;
 	}
-
 }

@@ -45,8 +45,8 @@ public class ItemsDAO implements Dao<Items> {
 		}
 		return new ArrayList<>();
 	}
-	
-	public Items readLatest() { 
+
+	public Items readLatest() {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();
 				ResultSet resultSet = statement.executeQuery("Select * FROM Items ORDER BY pid DESC LIMIT 1");) {
@@ -62,10 +62,10 @@ public class ItemsDAO implements Dao<Items> {
 	// Creates a new item in the database.
 
 	@Override
-	public Items create (Items Items) {
+	public Items create(Items Items) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement statement = connection
-						.prepareStatement ("INSERT INTO Items (productName, price) VALUES (?, ?)");) {
+						.prepareStatement("INSERT INTO Items (productName, price) VALUES (?, ?)");) {
 			statement.setString(1, Items.getProductName());
 			statement.setDouble(2, Items.getPrice());
 			statement.executeUpdate();
@@ -77,21 +77,57 @@ public class ItemsDAO implements Dao<Items> {
 		return null;
 	}
 
+	
+	// Reads one entry within a table.
+	
 	@Override
-	public Items read(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Items read(Long pid) {
+		try (Connection connection = DBUtils.getInstance().getConnection();
+				PreparedStatement statement = connection.prepareStatement("SELECT * FROM Items WHERE pid = ?");) {
+			statement.setLong(1, pid);
+			try (ResultSet resultSet = statement.executeQuery();) {
+				resultSet.next();
+				return modelFromResultSet(resultSet);
+			}
+		} catch (Exception e) {
+			LOGGER.debug(e);
+			LOGGER.error(e.getMessage());
+		}
+			return null;
 	}
 
-	@Override
-	public Items update(Items t) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	// Updates an Item within the table.
 
 	@Override
-	public int delete(long id) {
-		// TODO Auto-generated method stub
+	public Items update(Items Items) {
+		try (Connection connection = DBUtils.getInstance().getConnection();
+				PreparedStatement statement = connection
+						.prepareStatement("UPDATE Items SET productName = ?, price = ? WHERE pid = ?");) {
+			statement.setString(1, Items.getProductName());
+			statement.setDouble(2, Items.getPrice());
+			statement.setLong(3, Items.getPid());
+			statement.executeUpdate();
+			return read(Items.getPid());
+		} catch (Exception e) {
+			LOGGER.debug(e);
+			LOGGER.error(e);
+		}
+		return null;
+
+	}
+
+	// Deletes an Item using the PID parameter when given user input.
+	
+	@Override
+	public int delete(long pid) {
+		try (Connection connection = DBUtils.getInstance().getConnection();
+				PreparedStatement statement = connection.prepareStatement("DELETE FROM Items WHERE pid = ?");) {
+			statement.setLong(1, pid);
+			return statement.executeUpdate();
+		} catch (Exception e) {
+			LOGGER.debug(e);
+			LOGGER.error(e.getMessage());
+		}
 		return 0;
 	}
 }
