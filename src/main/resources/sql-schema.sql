@@ -13,14 +13,14 @@ CREATE TABLE IF NOT EXISTS `ims`.`Customers` (
 
 CREATE TABLE IF NOT EXISTS `ims`.`Items` (
 	`pid` INT NOT NULL AUTO_INCREMENT,
-    `Product` VARCHAR(40) NOT NULL,
+    `productName` VARCHAR(40) NOT NULL,
     `price` float,
     PRIMARY KEY (`pid`)
     );
     
 Create TABLE IF NOT EXISTS `ims`.`Order` (
 	`oid` INT NOT NULL AUTO_INCREMENT,
-    `Product` varchar(40),
+    `productName` varchar(40),
     `Sub_Total` float not null,
     `Tax` float,
     Primary key (`oid`)

@@ -33,5 +33,30 @@ public class ItemsController implements CrudController<Items> {
 		
 	}
 
+	// Allow a user to add an Item.
 	
+	@Override
+	public Items create() {
+		LOGGER.info("Please enter the product name");
+		String productName = utils.getString();
+		LOGGER.info("Please enter the price of the product");
+		Double price = utils.getDouble();
+		Items Items = itemsDAO.create(new Items(productName, price));
+		LOGGER.info("Item added");
+		return Items;
+		
+		
+	}
+
+	@Override
+	public Items update() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int delete() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }
