@@ -14,13 +14,13 @@ CREATE TABLE IF NOT EXISTS `ims`.`Customers` (
 CREATE TABLE IF NOT EXISTS `ims`.`Items` (
 	`pid` INT NOT NULL AUTO_INCREMENT,
     `productName` VARCHAR(40) NOT NULL,
-    `price` float,
+    `price` double,
     PRIMARY KEY (`pid`)
     );
     
 Create TABLE IF NOT EXISTS `ims`.`Order` (
-	`oid` INT NOT NULL AUTO_INCREMENT,
-    `id` int NOT NULL
+	`id` int NOT NULL,
+    `oid` INT NOT NULL AUTO_INCREMENT,
     Primary key (`oid`),
     Foreign key (`id`) references `Customers` (`id`)
     );
@@ -29,6 +29,8 @@ Create TABLE IF NOT EXISTS `ims`.`Transactions` (
 	`id` int NOT NULL,
     `pid` int NOT NULL,
     `oid` int NOT NULL,
+    `quantity` int,
+    `Total` double,
 	Foreign key (`id`) references `Customers` (`id`),
     Foreign Key (`pid`) references`Items` (`pid`),
     Foreign Key (`oid`) references `Order` (`oid`)

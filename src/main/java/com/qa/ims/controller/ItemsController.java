@@ -26,8 +26,8 @@ public class ItemsController implements CrudController<Items> {
 	@Override
 	public List<Items> readAll() {
 		List<Items> items = itemsDAO.readAll();
-		for (Items Items : items) {
-			LOGGER.info(Items);
+		for (Items item : items) {
+			LOGGER.info(item);
 		}
 		return items;
 		
@@ -41,9 +41,9 @@ public class ItemsController implements CrudController<Items> {
 		String productName = utils.getString();
 		LOGGER.info("Please enter the price of the product");
 		Double price = utils.getDouble();
-		Items Items = itemsDAO.create(new Items(productName, price));
+		Items item = itemsDAO.create(new Items(productName, price));
 		LOGGER.info("Item added");
-		return Items;
+		return item;
 		
 		
 	}
@@ -58,11 +58,13 @@ public class ItemsController implements CrudController<Items> {
 		String productName = utils.getString();
 		LOGGER.info("Please enter the new price of the item.");
 		Double price =  utils.getDouble();
-		Items Items = itemsDAO.update(new Items(pid, productName, price));
+		Items item = itemsDAO.update(new Items(pid, productName, price));
 		LOGGER.info("Item Updated");
-		return Items;
+		return item;
 	}
 
+	//Allows a user to delete an item from the database.
+	
 	@Override
 	public int delete() {
 		LOGGER.info("Please enter the PID of the Item you wish to remove.");

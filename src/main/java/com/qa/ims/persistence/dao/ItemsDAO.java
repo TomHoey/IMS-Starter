@@ -20,8 +20,8 @@ public class ItemsDAO implements Dao<Items> {
 	public Items modelFromResultSet(ResultSet resultSet) throws SQLException {
 		Long pid = resultSet.getLong("pid");
 		String productName = resultSet.getString("productName");
-		float price = resultSet.getFloat("price");
-		return new Items(pid, productName, (double) price);
+		Double price = resultSet.getDouble("price");
+		return new Items(pid, productName, price);
 	}
 
 	// Reads all Items from the database.
@@ -33,11 +33,11 @@ public class ItemsDAO implements Dao<Items> {
 			Statement statement = connection.createStatement();
 			ResultSet resultSet = statement.executeQuery("SELECT * FROM Items");
 			{
-				List<Items> Items = new ArrayList<>();
+				List<Items> items = new ArrayList<>();
 				while (resultSet.next()) {
-					Items.add(modelFromResultSet(resultSet));
+					items.add(modelFromResultSet(resultSet));
 				}
-				return Items;
+				return items;
 			}
 		} catch (SQLException e) {
 			LOGGER.debug(e);
@@ -77,9 +77,8 @@ public class ItemsDAO implements Dao<Items> {
 		return null;
 	}
 
-	
 	// Reads one entry within a table.
-	
+
 	@Override
 	public Items read(Long pid) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
@@ -93,7 +92,7 @@ public class ItemsDAO implements Dao<Items> {
 			LOGGER.debug(e);
 			LOGGER.error(e.getMessage());
 		}
-			return null;
+		return null;
 	}
 
 	// Updates an Item within the table.
@@ -117,7 +116,7 @@ public class ItemsDAO implements Dao<Items> {
 	}
 
 	// Deletes an Item using the PID parameter when given user input.
-	
+
 	@Override
 	public int delete(long pid) {
 		try (Connection connection = DBUtils.getInstance().getConnection();

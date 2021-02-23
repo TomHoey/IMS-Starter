@@ -16,6 +16,7 @@ public class Items {
 	public Items(String productName, Double price) {
 		this.setItem(productName);
 		this.setPrice(price);
+
 	}
 
 	public long getPid() {
