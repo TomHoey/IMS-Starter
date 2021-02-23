@@ -1,4 +1,4 @@
-drop schema ims;
+DROP SCHEMA IF EXISTS `ims`;
 
 CREATE SCHEMA IF NOT EXISTS `ims`;
 
@@ -20,18 +20,16 @@ CREATE TABLE IF NOT EXISTS `ims`.`Items` (
     
 Create TABLE IF NOT EXISTS `ims`.`Order` (
 	`oid` INT NOT NULL AUTO_INCREMENT,
-    `productName` varchar(40),
-    `Sub_Total` float not null,
-    `Tax` float,
-    Primary key (`oid`)
+    `id` int NOT NULL
+    Primary key (`oid`),
+    Foreign key (`id`) references `Customers` (`id`)
     );
     
 Create TABLE IF NOT EXISTS `ims`.`Transactions` (
-	`id` int NOT NULL PRIMARY KEY,
+	`id` int NOT NULL,
     `pid` int NOT NULL,
     `oid` int NOT NULL,
-    `Quantity` int,
-    `Price` float,
+	Foreign key (`id`) references `Customers` (`id`),
     Foreign Key (`pid`) references`Items` (`pid`),
     Foreign Key (`oid`) references `Order` (`oid`)
     );

@@ -67,6 +67,7 @@ public class ItemsController implements CrudController<Items> {
 	public int delete() {
 		LOGGER.info("Please enter the PID of the Item you wish to remove.");
 		Long pid = utils.getLong();
+		LOGGER.info("Item deleted!");
 		return itemsDAO.delete(pid);
 	}
 }
