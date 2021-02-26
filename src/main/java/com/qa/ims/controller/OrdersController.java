@@ -1,5 +1,6 @@
 package com.qa.ims.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -36,7 +37,7 @@ public class OrdersController implements CrudController<Orders> {
 		LOGGER.info("Please enter the OID of the order you wish to view.");
 		Long fk_oid = utils.getLong();
 		Orders transactions = ordersDAO.read(fk_oid);
-		LOGGER.info(transactions);
+		LOGGER.info(transactions.TransactionsString());
 		return transactions;
 	}
 
@@ -80,7 +81,10 @@ public class OrdersController implements CrudController<Orders> {
 		Long pid = utils.getLong();
 		LOGGER.info("How many of the items would you like to add to the order?");
 		Long quantity = utils.getLong();
-		Orders order = ordersDAO.update(new Orders(fk_oid, pid, quantity));
+		Orders temp = new Orders(fk_oid, new ArrayList<>(), new ArrayList<>());
+		temp.getPid().add(pid);
+		temp.getQuantity().add(quantity);
+		Orders order = ordersDAO.update(temp);
 		LOGGER.info("Order Updated");
 		return order;
 

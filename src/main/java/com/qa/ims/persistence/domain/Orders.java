@@ -1,12 +1,29 @@
 package com.qa.ims.persistence.domain;
 
+import java.util.ArrayList;
+
 public class Orders {
 
 	private Long oid;
 	private Long fk_cid;
 	private Long fk_oid;
-	private Long pid;
-	private Long quantity;
+	private ArrayList<Long> pid;
+	private ArrayList<Long> quantity;
+	private ArrayList<Double> totalPrice;
+
+	public Orders() {
+		pid = new ArrayList<>();
+		quantity = new ArrayList<>();
+		totalPrice = new ArrayList<>();
+	}
+	
+	public ArrayList<Double> getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(ArrayList<Double> totalPrice) {
+		this.totalPrice = totalPrice;
+	}
 
 	public Orders (Long oid) {
 		this.setOid(oid);
@@ -17,7 +34,7 @@ public class Orders {
 		this.setFk_cid(fk_cid);
 	}
 
-	public Orders(Long fk_oid, Long pid, Long quantity) {
+	public Orders(Long fk_oid, ArrayList<Long> pid, ArrayList<Long> quantity) {
 		this.setFk_oid(fk_oid);
 		this.setPid(pid);
 		this.setQuantity(quantity);
@@ -47,19 +64,19 @@ public class Orders {
 		this.fk_oid = fk_oid;
 	}
 
-	public Long getPid() {
+	public ArrayList<Long> getPid() {
 		return pid;
 	}
 
-	public void setPid(Long pid) {
+	public void setPid(ArrayList<Long> pid) {
 		this.pid = pid;
 	}
 
-	public Long getQuantity() {
+	public ArrayList<Long> getQuantity() {
 		return quantity;
 	}
 
-	public void setQuantity(Long quantity) {
+	public void setQuantity(ArrayList<Long> quantity) {
 		this.quantity = quantity;
 	}
 
@@ -69,8 +86,12 @@ public class Orders {
 		
 	}
 	
-	public String tooString() {
-		return "fk_oid: " + fk_oid + " |" + "pid: " + pid +  " |" + "quantity: " + quantity;
+	public String TransactionsString() {
+		String string = "Oid: " + fk_oid;
+		for (int i = 0; i < pid.size(); i++) {
+			string = string + "\n pid " + pid.get(i) + " quantity " + quantity.get(i) + " Total_Price " + totalPrice.get(i);
+		}			
+	return string;
 	}
 	
 	@Override
