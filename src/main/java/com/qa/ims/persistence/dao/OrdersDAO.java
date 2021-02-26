@@ -70,7 +70,7 @@ public class OrdersDAO implements Dao<Orders> {
 	@Override
 	public Orders read(Long fk_oid) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
-				PreparedStatement statement = connection.prepareStatement("SELECT * FROM transactions WHERE fk_oid = ?");) {
+				PreparedStatement statement = connection.prepareStatement("SELECT transactions.fk_oid, transactions.pid, transactions.quantity, sum(transactions.quantity * items.price) as Total_Price from transactions, orders, items where transactions.pid = items.pid and transactions.fk_oid = orders.oid;");) {
 			statement.setLong(1, fk_oid);
 			try (ResultSet resultSet = statement.executeQuery();) {
 				resultSet.next();
@@ -102,7 +102,7 @@ public class OrdersDAO implements Dao<Orders> {
 	public Orders addItems(Orders items) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement statement = connection
-						.prepareStatement("INSERT INTO Transactions (fk_oid, pid, quantity) VALUES (?, ?)");) {
+						.prepareStatement("INSERT INTO Transactions (fk_oid, pid, quantity) VALUES (?, ?, ?)");) {
 			statement.setLong(1, items.getFk_oid());
 			statement.setLong(2, items.getPid());
 			statement.setLong(3, items.getQuantity());
@@ -138,7 +138,7 @@ public class OrdersDAO implements Dao<Orders> {
 	public int delete(long pid) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement statement = connection
-						.prepareStatement("DELETE FROM Transactions WHERE items.pid = ?");) {
+						.prepareStatement("DELETE FROM Transactions WHERE transactions.pid = ?");) {
 			statement.setLong(1, pid);
 			return statement.executeUpdate();
 		} catch (Exception e) {

@@ -20,6 +20,13 @@ public class ItemsUnitTest {
 	}
 
 	@Test
+	public void itemsConstructorEmpty() {
+		Items items = new Items();
+		assertNotNull(items);
+	
+	}
+	
+	@Test
 	public void ItemsConstructorOne() {
 		Items testItems = new Items(pid, productName, price);
 		assertNotNull(testItems);

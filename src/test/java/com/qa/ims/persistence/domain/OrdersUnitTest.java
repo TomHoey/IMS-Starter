@@ -15,6 +15,7 @@ public class OrdersUnitTest {
 	
 	private Long oid = (long) 1;
 	private Long fk_cid = (long) 1001;
+	private Long fk_oid = (long) 1;
 	private Long pid = (long) 101;
 	private Long quantity = (long) 3;
 	
@@ -25,25 +26,19 @@ public class OrdersUnitTest {
 	
 	@Test
 	public void OrdersConstrutorOne() {
-		Orders testOrders = new Orders(fk_cid);
+		Orders testOrders = new Orders(oid);
 		assertNotNull(testOrders);
 	}
 	
 	@Test
 	public void OrdersConstructorTwo() {
-		Orders testOrders = new Orders(fk_cid, pid, quantity);
+		Orders testOrders = new Orders(oid, fk_cid);
 		assertNotNull(testOrders);
 	}
 	
 	@Test
 	public void OrdersContructorThree() { 
-		Orders testOrders = new Orders(fk_cid, quantity);
-		assertNotNull(testOrders);
-	}
-	
-	@Test
-	public void OrdersConstructorFour() {
-		Orders testOrders = new Orders(oid, fk_cid, pid, quantity);
+		Orders testOrders = new Orders(fk_oid, pid, quantity);
 		assertNotNull(testOrders);
 	}
 	
@@ -52,6 +47,14 @@ public class OrdersUnitTest {
 		Orders testOrders = new Orders(oid, fk_cid);
 		String result = testOrders.toString();
 		assertEquals("OID: " + oid + " |" + "CID: " + fk_cid, result);
+
+	}
+	
+	@Test
+	public void testTooString () {
+		Orders testOrders = new Orders (fk_oid, pid, quantity);
+		String result = testOrders.tooString();
+		assertEquals("fk_oid: " + fk_oid + " |" + "pid: " + pid +  " |" + "quantity: " + quantity, result);
 	}
 	
 	@Test

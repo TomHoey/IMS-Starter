@@ -6,6 +6,10 @@ public class Items {
 	private String productName;
 	private Double price;
 
+	public Items () {
+		
+	}
+	
 	public Items(Long pid, String productName, Double price) {
 		this.setPid(pid);
 		this.setItem(productName);

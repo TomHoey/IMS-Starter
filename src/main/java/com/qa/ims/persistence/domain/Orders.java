@@ -18,7 +18,7 @@ public class Orders {
 	}
 
 	public Orders(Long fk_oid, Long pid, Long quantity) {
-		this.setFk_cid(fk_oid);
+		this.setFk_oid(fk_oid);
 		this.setPid(pid);
 		this.setQuantity(quantity);
 	}

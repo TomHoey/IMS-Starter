@@ -37,11 +37,7 @@ public class CustomerController implements CrudController<Customer> {
 		}
 		return customers;
 	}
-	// Reads a single entry in the database.
 	
-	public Customer readOne() {
-		return null;
-	}
 	
 	/**
 	 * Creates a customer by taking in user input
@@ -90,5 +86,6 @@ public class CustomerController implements CrudController<Customer> {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 }

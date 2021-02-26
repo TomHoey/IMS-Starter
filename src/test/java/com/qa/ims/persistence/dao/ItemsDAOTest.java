@@ -2,6 +2,7 @@
 package com.qa.ims.persistence.dao;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -76,4 +77,27 @@ public class ItemsDAOTest {
 	public void testDelete() {
 		assertEquals(1, itemsDAO.delete(1));
 	}
+	
+	@Test
+	public void testCreateExceptions() {
+		assertNull(itemsDAO.create(null));
+	}
+	
+	@Test
+	public void testReadLatestExceptions() {
+		itemsDAO.delete(1L);
+		assertNull(itemsDAO.readLatest());	
+	}
+	
+	@Test
+	public void testReadExceptions() {
+		itemsDAO.delete(1L);
+		assertNull(itemsDAO.read(1L));	
+	}
+	
+	@Test
+	public void testUpdateException() {
+        Items items = new Items();
+        assertNull(itemsDAO.update(items));
+    }
 }

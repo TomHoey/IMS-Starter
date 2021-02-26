@@ -21,7 +21,7 @@ Create TABLE IF NOT EXISTS `Orders` (
     `oid` INT (20) NOT NULL AUTO_INCREMENT, 
     Primary key (`id`),
     `fk_cid` int not null,
-    constraint `fk_cid` foreign key (`fk_cid`) references Customers (`id`) On DELETE CASCADE
+    foreign key (`fk_cid`) references Customers (`id`) On DELETE CASCADE
     );
     
 Create TABLE IF NOT EXISTS `Transactions` (

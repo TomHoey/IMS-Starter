@@ -7,9 +7,11 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import com.qa.ims.controller.ItemsController;
 import com.qa.ims.persistence.dao.ItemsDAO;
@@ -17,6 +19,7 @@ import com.qa.ims.persistence.domain.Items;
 import com.qa.ims.utils.DBUtils;
 import com.qa.ims.utils.Utils;
 
+@RunWith(MockitoJUnitRunner.class)
 public class ItemsControllerTest {
 
 	@Mock
@@ -93,7 +96,7 @@ public class ItemsControllerTest {
 		Mockito.when(utils.getLong()).thenReturn(pid);
 		Mockito.when(dao.delete(pid)).thenReturn(1);
 
-		assertEquals(101, this.testItemController.delete());
+		assertEquals(1, this.testItemController.delete());
 
 		Mockito.verify(utils, Mockito.times(1)).getLong();
 		Mockito.verify(dao, Mockito.times(1)).delete(pid);

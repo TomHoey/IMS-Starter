@@ -39,8 +39,7 @@ public class OrdersController implements CrudController<Orders> {
 		LOGGER.info(transactions);
 		return transactions;
 	}
-	
-	
+
 	// Allows a user to create an order instance.
 
 	@Override
@@ -66,9 +65,8 @@ public class OrdersController implements CrudController<Orders> {
 			LOGGER.info("Do you want to add items to your order?");
 			addItemstoOrder = utils.getString();
 			ordersDAO.addItems(order);
-		} while (addItemstoOrder.equals("yes"));
-		LOGGER.info("Your order has been updated");
-	
+		} while (addItemstoOrder.equals("yes")); 
+			LOGGER.info("Your order has been updated");
 		return order;
 	}
 
@@ -98,8 +96,5 @@ public class OrdersController implements CrudController<Orders> {
 		Long pid = utils.getLong();
 		return ordersDAO.delete(pid);
 	}
-
-
-	
 
 }
