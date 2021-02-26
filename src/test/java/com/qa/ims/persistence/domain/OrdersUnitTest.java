@@ -1,9 +1,10 @@
 package com.qa.ims.persistence.domain;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import org.junit.Before;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
 
@@ -12,11 +13,10 @@ public class OrdersUnitTest {
 	private static Orders testOrders;
 	
 	
-	private Long id = (long) 1;
+	private Long oid = (long) 1;
 	private Long fk_cid = (long) 1001;
 	private Long pid = (long) 101;
 	private Long quantity = (long) 3;
-	private Double totalPrice = (double) (pid * quantity);
 	
 	@Before
 	public void beforeEach() {
@@ -43,14 +43,15 @@ public class OrdersUnitTest {
 	
 	@Test
 	public void OrdersConstructorFour() {
-		Orders testOrders = new Orders(pid, quantity, totalPrice);
+		Orders testOrders = new Orders(oid, fk_cid, pid, quantity);
 		assertNotNull(testOrders);
 	}
 	
 	@Test
-	public void OrdersConstructorFive() {
-		Orders testOrders = new Orders(id, fk_cid, pid, quantity, totalPrice);
-		assertNotNull(testOrders);
+	public void testToString () {
+		Orders testOrders = new Orders(oid, fk_cid);
+		String result = testOrders.toString();
+		assertEquals("OID: " + oid + " |" + "CID: " + fk_cid, result);
 	}
 	
 	@Test

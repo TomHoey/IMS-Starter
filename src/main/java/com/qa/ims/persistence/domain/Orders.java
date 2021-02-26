@@ -2,34 +2,51 @@ package com.qa.ims.persistence.domain;
 
 public class Orders {
 
-	private Long id;
 	private Long oid;
+	private Long fk_cid;
+	private Long fk_oid;
 	private Long pid;
 	private Long quantity;
-	private Double totalPrice;
-	
-	public Orders(Long id) {
-		this.setId(id);
-	}
-	
-	public Orders (Long oid, Long pid, Long quantity) {
+
+	public Orders (Long oid) {
 		this.setOid(oid);
+	}
+	
+	public Orders(Long oid, Long fk_cid) {
+		this.setOid(oid);
+		this.setFk_cid(fk_cid);
+	}
+
+	public Orders(Long fk_oid, Long pid, Long quantity) {
+		this.setFk_cid(fk_oid);
 		this.setPid(pid);
 		this.setQuantity(quantity);
 	}
-	
-	public Orders (Long pid, Long quantity) {
-		this.setPid(pid);
-		this.setQuantity(quantity);
+		
+	public Long getOid() {
+		return oid;
 	}
-	
-	public Orders (Long pid, Long quantity, Double totalPrice) {
-		this.setPid(pid);
-		this.setQuantity(quantity);
-		this.setTotal(totalPrice);
-	
+
+	public void setOid(Long oid) {
+		this.oid = oid;
 	}
-	
+
+	public Long getFk_cid() {
+		return fk_cid;
+	}
+
+	public void setFk_cid(Long fk_cid) {
+		this.fk_cid = fk_cid;
+	}
+
+	public Long getFk_oid() {
+		return fk_oid;
+	}
+
+	public void setFk_oid(Long fk_oid) {
+		this.fk_oid = fk_oid;
+	}
+
 	public Long getPid() {
 		return pid;
 	}
@@ -46,38 +63,25 @@ public class Orders {
 		this.quantity = quantity;
 	}
 
-	public Double getTotal() {
-		return totalPrice;
-	}
-
-	public void setTotal(Double totalPrice) {
-		this.totalPrice = totalPrice;
-	}
-
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public Long getOid() {
-		return oid;
-	}
-	public void setOid(Long oid) {
-		this.oid = oid;
-	}
-
-	@Override
+	 @Override
 	public String toString() {
-		return "ID: " + " |" + "OID: " + oid;
+		return "OID: " + oid + " |" + "CID: " + fk_cid; 
+		
 	}
-
+	
+	public String tooString() {
+		return "fk_oid: " + fk_oid + " |" + "pid: " + pid +  " |" + "quantity: " + quantity;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((oid == null) ? 0 : oid.hashCode());
+		result = prime * result + ((fk_cid == null) ? 0 : fk_cid.hashCode());
+		result = prime * result + ((fk_oid == null) ? 0 : fk_oid.hashCode());
+		result = prime * result + ((pid == null) ? 0 : pid.hashCode());
+		result = prime * result + ((quantity == null) ? 0 : quantity.hashCode());
 		return result;
 
 	}
@@ -91,15 +95,30 @@ public class Orders {
 		if (getClass() != obj.getClass())
 			return false;
 		Orders other = (Orders) obj;
-		if (getId() == null) {
-			if (other.getId() != null)
+		if (getOid() == null) {
+			if (other.getOid() != null)
 				return false;
-		} else if (!getId().equals(other.getId()))
+		} else if (!getOid().equals(other.getOid()))
 			return false;
-		if (oid == null) {
-			if (other.oid != null)
+		if (getFk_cid() == null) {
+			if (other.getFk_cid() != null)
 				return false;
-		} else if (!oid.equals(other.oid))
+		} else if (!getFk_cid().equals(other.getFk_cid()))
+			return false;
+		if (getFk_oid() == null) {
+			if (other.getFk_oid() != null)
+				return false;
+		} else if (!getFk_oid().equals(other.getFk_oid()))
+			return false;
+		if (getPid() == null) {
+			if (other.getPid() != null)
+				return false;
+		} else if (!getPid().equals(other.getPid()))
+			return false;
+		if (getQuantity() == null) {
+			if (other.getQuantity() != null)
+				return false;
+		} else if (!getQuantity().equals(other.getQuantity()))
 			return false;
 		return true;
 	}

@@ -7,8 +7,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 import com.qa.ims.persistence.domain.Items;
 import com.qa.ims.utils.DBUtils;
 
@@ -28,18 +30,18 @@ public class ItemsDAO implements Dao<Items> {
 
 	@Override
 	public List<Items> readAll() {
-		try {
-			Connection connection = DBUtils.getInstance().getConnection();
-			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT * FROM Items");
-			{
-				List<Items> items = new ArrayList<>();
-				while (resultSet.next()) {
-					items.add(modelFromResultSet(resultSet));
-				}
-				return items;
+		try (Connection connection = DBUtils.getInstance().getConnection();
+				Statement statement = connection.createStatement();
+				ResultSet resultSet = statement.executeQuery("SELECT * FROM Items");) {
+
+			List<Items> items = new ArrayList<>();
+			while (resultSet.next()) {
+				items.add(modelFromResultSet(resultSet));
 			}
-		} catch (SQLException e) {
+			return items;
+		} catch (
+
+		SQLException e) {
 			LOGGER.debug(e);
 			LOGGER.error(e.getMessage());
 		}
@@ -129,4 +131,5 @@ public class ItemsDAO implements Dao<Items> {
 		}
 		return 0;
 	}
+
 }

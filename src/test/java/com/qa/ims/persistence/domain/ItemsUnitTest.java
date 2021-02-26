@@ -2,10 +2,8 @@ package com.qa.ims.persistence.domain;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-
 import org.junit.Before;
-import org.junit.jupiter.api.Test;
-
+import org.junit.Test;
 import nl.jqno.equalsverifier.EqualsVerifier;
 
 public class ItemsUnitTest {

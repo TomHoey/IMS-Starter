@@ -37,7 +37,12 @@ public class CustomerController implements CrudController<Customer> {
 		}
 		return customers;
 	}
-
+	// Reads a single entry in the database.
+	
+	public Customer readOne() {
+		return null;
+	}
+	
 	/**
 	 * Creates a customer by taking in user input
 	 */
@@ -78,6 +83,12 @@ public class CustomerController implements CrudController<Customer> {
 		LOGGER.info("Please enter the id of the customer you would like to delete");
 		Long id = utils.getLong();
 		return customerDAO.delete(id);
+	}
+
+	@Override
+	public Customer read() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

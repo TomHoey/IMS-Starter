@@ -72,4 +72,10 @@ public class ItemsController implements CrudController<Items> {
 		LOGGER.info("Item deleted!");
 		return itemsDAO.delete(pid);
 	}
+
+	@Override
+	public Items read() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

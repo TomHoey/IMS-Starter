@@ -19,7 +19,7 @@ public class Items {
 
 	}
 
-	public long getPid() {
+	public Long getPid() {
 		return pid;
 	}
 
@@ -77,10 +77,15 @@ public class Items {
 				return false;
 		} else if (!getProductName().equals(other.getProductName()))
 				return false;
-		if (pid == null) {
-			if (other.pid != null)
+		if (getPid() == null) {
+			if (other.getPid() != null)
 				return false;
-		}else if (!pid.equals(other.pid))
+		}else if (!getPid().equals(other.getPid()))
+			return false;
+		if (getPrice() == null) {
+			if (other.getPrice() != null)
+				return false;
+		} else if (!getPrice().equals(other.getPrice()))
 			return false;
 		return true;
 	}

@@ -18,23 +18,20 @@ CREATE TABLE IF NOT EXISTS `ims`.`Items` (
     PRIMARY KEY (`pid`)
     );
     
-Create TABLE IF NOT EXISTS `ims`.`Order` (
-	`id` int NOT NULL,
-    `oid` INT NOT NULL AUTO_INCREMENT,
+Create TABLE IF NOT EXISTS `ims`.`Orders` (
+    `oid` INT (20) NOT NULL AUTO_INCREMENT, 
     Primary key (`oid`),
-    Foreign key (`id`) references `Customers` (`id`)
+    `fk_cid` int not null,
+    constraint `fk_cid` foreign key (`fk_cid`) references Customers (`id`)
     );
     
 Create TABLE IF NOT EXISTS `ims`.`Transactions` (
-	`id` int NOT NULL,
+    `fk_oid` int NOT NULL,
     `pid` int NOT NULL,
-    `oid` int NOT NULL,
     `quantity` int,
-    `Total` double,
-	Foreign key (`id`) references `Customers` (`id`),
-    Foreign Key (`pid`) references`Items` (`pid`),
-    Foreign Key (`oid`) references `Order` (`oid`)
+     Foreign Key (`fk_oid`) references `Orders` (`oid`),
+     Foreign Key (`pid`) references`Items` (`pid`)
     );
     
 ALTER TABLE `ims`.`Items` auto_increment = 100;
-ALTER TABLE `ims`.`Order` auto_increment = 1000;
+ALTER TABLE `ims`.`Orders` auto_increment = 1000;

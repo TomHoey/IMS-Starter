@@ -9,7 +9,7 @@ public interface Dao<T> {
 	List<T> readAll();
 	
 	T read(Long id);
-
+	
 	T create(T t);
 
 	T update(T t);
@@ -17,4 +17,5 @@ public interface Dao<T> {
 	int delete(long id);
 
 	T modelFromResultSet(ResultSet resultSet) throws SQLException;
+
 }
