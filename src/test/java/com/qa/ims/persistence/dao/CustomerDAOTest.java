@@ -1,12 +1,12 @@
 package com.qa.ims.persistence.dao;
 
+import org.junit.jupiter.api.Test;
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Before;
-import org.junit.Test;
 
 import com.qa.ims.persistence.domain.Customer;
 import com.qa.ims.utils.DBUtils;
@@ -40,9 +40,9 @@ public class CustomerDAOTest {
 	}
 
 	@Test
-	public void testRead() {
+	public void testReadOne() {
 		final long ID = 1L;
-		assertEquals(new Customer(ID, "jordan", "harrison"), DAO.read(ID));
+		assertEquals(new Customer(ID, "jordan", "harrison"), DAO.readOne(ID));
 	}
 
 	@Test
