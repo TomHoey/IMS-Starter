@@ -46,26 +46,24 @@ public class OrdersController implements CrudController<Orders> {
 	@Override
 	public Orders create() {
 		LOGGER.info("Please enter your Customer ID");
-		Long oid = utils.getLong();
-		Orders order = ordersDAO.create(new Orders(oid));
-		// return order here maybe?
+		Long fk_cid = utils.getLong();
+		Orders order = ordersDAO.create(new Orders(fk_cid));
 
 		// When a customer creates an order, this ensures there are some items within
 		// the order to begin with.
-
 		
-		// Need this to then jump onto that order and add items to it.
 		String addItemstoOrder;
-
 		do {
 
 			LOGGER.info("Please enter the PID of the item you would like to add to the order.");
-			utils.getLong();
+			Long pid = utils.getLong();
 			LOGGER.info("How many of the items would you like to add to the order?");
-			utils.getLong();
+			Long quantity = utils.getLong();
 			LOGGER.info("Do you want to add items to your order?");
 			addItemstoOrder = utils.getString();
-			ordersDAO.addItems(order);
+			Orders addItems = ordersDAO.addItems(order);
+			addItems.getPid().add(pid);
+			addItems.getQuantity().add(quantity);
 		} while (addItemstoOrder.equals("yes")); 
 			LOGGER.info("Your order has been updated");
 		return order;

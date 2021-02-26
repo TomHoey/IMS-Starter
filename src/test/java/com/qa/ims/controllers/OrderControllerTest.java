@@ -44,7 +44,7 @@ public class OrderControllerTest {
 
 	@Test
 	public void testCreate() {
-		final Orders created = new Orders(1L, 1L, 1L);
+		final Orders created = new Orders(1L, 1L);
 
 		Mockito.when(utils.getLong()).thenReturn(1L);
 		Mockito.when(utils.getLong()).thenReturn(1L);
@@ -61,7 +61,7 @@ public class OrderControllerTest {
 	@Test
 	public void testRead() {
 		final long fk_oid = 1L;
-		assertEquals(new Orders(fk_oid, 1L), dao.read(fk_oid));
+		assertEquals(new Orders(), dao.read(fk_oid));
 
 	}
 
@@ -80,10 +80,9 @@ public class OrderControllerTest {
 
 	@Test
 	public void testUpdate() {
-		Orders updated = new Orders(1L, 1L, 1L);
+		Orders updated = new Orders(1L, 1L);
 
-		Mockito.when(this.utils.getLong()).thenReturn(1L);
-		Mockito.when(this.utils.getLong()).thenReturn(updated.getPid(), updated.getQuantity());
+		Mockito.when(this.utils.getLong()).thenReturn(1L, 1L);
 		Mockito.when(this.dao.update(updated)).thenReturn(updated);
 
 		assertEquals(updated, this.testOrdersController.update());

@@ -3,6 +3,8 @@ package com.qa.ims.persistence.domain;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.util.ArrayList;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -12,17 +14,24 @@ public class OrdersUnitTest {
 	
 	private static Orders testOrders;
 	
-	
-	private Long oid = (long) 1;
-	private Long fk_cid = (long) 1001;
-	private Long fk_oid = (long) 1;
-	private Long pid = (long) 101;
-	private Long quantity = (long) 3;
+	private Long oid;
+	private Long fk_cid;
+	private Long fk_oid;
+	private ArrayList<Long> pid;
+	private ArrayList<Long> quantity;
+	private ArrayList<Double> totalPrice;
 	
 	@Before
 	public void beforeEach() {
 		testOrders = null;
 	}
+	
+	@Test
+	public void  testOrdersArray() {
+		Orders testOrders = new Orders();
+		assertNotNull(testOrders);
+	}
+
 	
 	@Test
 	public void OrdersConstrutorOne() {
@@ -50,12 +59,12 @@ public class OrdersUnitTest {
 
 	}
 	
-	@Test
+	/* @Test
 	public void testTooString () {
 		Orders testOrders = new Orders (fk_oid, pid, quantity);
-		String result = testOrders.tooString();
-		assertEquals("fk_oid: " + fk_oid + " |" + "pid: " + pid +  " |" + "quantity: " + quantity, result);
-	}
+		String result = testOrders.TransactionsString();
+		assertEquals("\n pid " + pid + " quantity " + quantity+ " Total_Price " + totalPrice, result); 
+	} */
 	
 	@Test
 	public void testEquals() {

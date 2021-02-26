@@ -1,6 +1,7 @@
 package com.qa.ims.persistence.dao;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,10 +23,22 @@ public class OrdersDAOTest {
 	}
 	
 	@Test
+	public void testModelFrom() {
+		final Orders result = new Orders();
+		assertNotNull(result);
+	}
+	
+	@Test
 	public void testCreate() {
 		final Orders created = new Orders(2L, 1L);
 		assertEquals(created, DAO.create(created));
 		
+	}
+	
+	@Test
+	public void testAddItems() {
+		final Orders created = new Orders(1L);
+		assertEquals(created, DAO.create(created));
 	}
 	
 	@Test
@@ -43,7 +56,7 @@ public class OrdersDAOTest {
 	
 	@Test
 	public void testUpdate() {
-		final Orders updated = new Orders (1L, 1L, 1L);
+		final Orders updated = new Orders (1L);
 		assertEquals(updated, DAO.update(updated));
 	}
 

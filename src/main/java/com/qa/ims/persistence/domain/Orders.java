@@ -103,6 +103,7 @@ public class Orders {
 		result = prime * result + ((fk_oid == null) ? 0 : fk_oid.hashCode());
 		result = prime * result + ((pid == null) ? 0 : pid.hashCode());
 		result = prime * result + ((quantity == null) ? 0 : quantity.hashCode());
+		result = prime * result + ((totalPrice == null) ? 0 : totalPrice.hashCode());
 		return result;
 
 	}
@@ -140,6 +141,11 @@ public class Orders {
 			if (other.getQuantity() != null)
 				return false;
 		} else if (!getQuantity().equals(other.getQuantity()))
+			return false;
+		if (getTotalPrice() == null) {
+			if (other.getTotalPrice() != null)
+				return false;
+		} else if (!getTotalPrice().equals(other.getTotalPrice()))
 			return false;
 		return true;
 	}
